@@ -13,9 +13,10 @@ const green = "#4aec8c";
 
 const Timer = () => {
   const settingsInfo = useContext(SettingsContext);
+  
+  const [isPaused, setIsPaused] = useState(true);
   const [mode, setMode] = useState("work"); //null, pause or break
   const [secondsLeft, setSecondsLeft] = useState(0);
-  const [isPaused, setIsPaused] = useState(true);
 
   const secondLeftRef = useRef(secondsLeft);
   const isPausedRef = useRef(isPaused);
@@ -23,7 +24,7 @@ const Timer = () => {
 
   const tick = () => {
     secondLeftRef.current--;
-    setSecondsLeft(secondLeftRef.current - 1);
+    setSecondsLeft(secondLeftRef.current);
   };
 
   const initTimer = () => {
@@ -69,6 +70,7 @@ const Timer = () => {
   const minutes = Math.floor(secondsLeft / 60);
   let seconds = secondsLeft % 60;
   if (seconds < 10) seconds = "0" + seconds;
+  
   return (
     <div>
       <CircularProgressbar
